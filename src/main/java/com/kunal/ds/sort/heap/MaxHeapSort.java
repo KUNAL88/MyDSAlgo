@@ -26,10 +26,11 @@ public class MaxHeapSort implements HeapSort {
 
         }
 
-        System.out.println("Sorted Array As Below ..");
+        System.out.println("Max Heap Sorted Array As Below ..");
         for (int n=1;n<array_length;n++){
             System.out.print(a[n]+"  ");
         }
+        System.out.println();
 
 
     }//end sort()       complexity of complete algorithm nlog(n)

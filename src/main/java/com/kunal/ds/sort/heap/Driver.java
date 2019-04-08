@@ -33,6 +33,10 @@ public class Driver {
         heap_sort_instance=new MaxHeapSort();
         heap_sort_instance.sort(array);
 
+        heap_sort_instance=new MinHeapSort();
+        heap_sort_instance.sort(array);
+
+
 
     }
 }
