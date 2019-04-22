@@ -83,6 +83,7 @@ class Node{
     int data;
     Node right;
 
+
     Node(Node left,int data,Node right){
         this.left=left;
         this.data=data;
