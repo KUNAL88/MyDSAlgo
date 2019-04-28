@@ -1,4 +1,4 @@
-package com.kunal.algo.gt;
+package com.kunal.algo.gt.traversal;
 
 public class Weight {
 

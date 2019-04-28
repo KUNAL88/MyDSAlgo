@@ -4,7 +4,7 @@ public class Queue_Array {
 
     static int front=-1;
     static int rare=-1;
-    static int sizeOfQueue=5;
+    static int sizeOfQueue=50;
     static int[] queue=new int[sizeOfQueue];
 
     public static void main(String[] args) {
@@ -46,28 +46,33 @@ public class Queue_Array {
 
     }
 
-    public static void DeQueue(){
+    public static int DeQueue(){
 
+       int deQueueItem=-1;
         if(front==-1){
             System.out.println(" Queue is Empty ....");
         }else {
 
             if(front==rare){
-
-            System.out.println(" Data Removed is : "+queue[front]);
+                deQueueItem=queue[front];
+            System.out.println(" Data Removed is : "+deQueueItem);
             front=-1;
             rare=-1;
             }else {
-
-                System.out.println(" Data Removed is : "+queue[front]);
+                deQueueItem=queue[front];
+                System.out.println(" Data Removed is : "+deQueueItem);
                 front=(front+1)%sizeOfQueue;
-
             }
-
         }
+        return deQueueItem;
+    }
 
+    public static boolean isQueueEmpty(){
 
-
-
+        if(front==-1 && rare==-1){
+            return true;
+        }else {
+            return false;
+        }
     }
 }
