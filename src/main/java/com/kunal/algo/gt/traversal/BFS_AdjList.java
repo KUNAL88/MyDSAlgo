@@ -8,6 +8,15 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 
+
+/*
+This class calculate BFS using adj list ...
+
+ */
+
+//dvbjsvskndsfdsfdsfjsdjs
+
+
 public class BFS_AdjList {
 
     private static BufferedReader br;
