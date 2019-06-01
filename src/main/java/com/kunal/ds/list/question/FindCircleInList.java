@@ -11,6 +11,8 @@ public class FindCircleInList {
         circularList.addStart(20);
         circularList.addStart(30);
 
-        circularList.display();
+      //  circularList.display();
+
+        System.out.println(circularList.isCircleExists());
     }
 }

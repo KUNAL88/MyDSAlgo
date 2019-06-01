@@ -2,7 +2,7 @@ package com.kunal.ds.list.question;
 
 import com.kunal.ds.list.singly.SingleLinkList;
 
-public class SampleQuestions {
+public class FindNthFromLast {
 
 
     public static void main(String[] args) {

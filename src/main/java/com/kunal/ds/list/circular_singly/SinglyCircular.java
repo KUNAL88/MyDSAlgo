@@ -3,6 +3,7 @@ package com.kunal.ds.list.circular_singly;
 public class SinglyCircular {
 
     Node start=null;
+    Node end=null;
 
     public void addStart(int data){
 
@@ -11,10 +12,12 @@ public class SinglyCircular {
         if(start==null){
             start=node;
             node.addr=start;
+            end=start;
         }else {
             node.addr=start;
             start.addr=node;
             start=node;
+            end.addr=start;
         }
 
 
@@ -36,7 +39,32 @@ public class SinglyCircular {
 
         }while (temp!=start);
 
-        System.out.println(" <- End ");
+        System.out.println("\n <- End ");
+    }
+
+    public boolean isCircleExists(){
+
+        boolean isCircleExists=false;
+        if(start==null){
+            return isCircleExists;
+        }
+
+        Node slowPtr=start;
+        Node fastPtr=start;
+
+       do{
+           if(slowPtr.addr==null || fastPtr.addr==null){
+               break;
+           }
+            slowPtr=slowPtr.addr;
+           fastPtr=fastPtr.addr.addr;
+
+       }while (slowPtr!=fastPtr);
+
+       if(slowPtr==fastPtr)
+           isCircleExists=true;
+
+       return isCircleExists;
     }
 
 

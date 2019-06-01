@@ -25,7 +25,16 @@ public class Stack_Array {
 
 
     }
-
+/*
+Algorithm : push() Item into Stack
+Initialize : top=-1 , sizeOfStack=n; stack[n]
+1. Check if stack is full
+    - If Yes, "Print a message - Stackoverflow" and return
+    - If No, then
+        a. increment top i.e. top++
+        b. add new item to the top of the stack i.e. stack[top]=item;
+2. Exit
+ */
 
     public static void push(int data){
 
@@ -39,6 +48,17 @@ public class Stack_Array {
 
 
     }
+
+ /*
+  Algorithm : pop() Item into Stack
+Initialize : top=-1 , sizeOfStack=n; stack[n]
+1. Check if stack is empty i.e. if(top==-1)
+   - If Yes, the print message "Stack is Empty/ Underflow"
+   - If No, remove  item at the top
+        int item=stack[top]
+        top--;
+2. Exit
+  */
 
     public static int pop(){
 
