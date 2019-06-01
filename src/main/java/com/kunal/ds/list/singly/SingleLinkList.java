@@ -1,9 +1,40 @@
-package com.kunal.ds.list.singly.list;
+package com.kunal.ds.list.singly;
 
 public class SingleLinkList {
 
     private Node start=null;
 
+    public void findNthFromLast(int searchAtIndexFromLast){
+
+        if(start==null || searchAtIndexFromLast<=0){
+            System.out.println(" List is Empty or "+searchAtIndexFromLast+" " +
+                    "Index You entered is zero/negative ...");
+            return;
+        }
+
+        int totalNumberOfItem=0;
+        Node temp=start;
+
+        while (temp!=null){
+            totalNumberOfItem++;
+            temp=temp.addr;
+
+        } //complexity O(n)
+
+        int diff=totalNumberOfItem-searchAtIndexFromLast;
+
+        if(diff<0){
+                System.out.println(searchAtIndexFromLast+" Index your searching is out of range ...");
+        }else {
+            temp=start;
+            for(int index=0;index<diff;index++){
+                temp=temp.addr;
+            }//complexity O(n)
+
+            System.out.println(searchAtIndexFromLast+" last Item is : "+temp.data);
+        }
+
+    }
 
     public void search(int data){
 
@@ -39,10 +70,11 @@ public class SingleLinkList {
 
         while (temp!=null){
 
-            System.out.println(temp.data);
+            System.out.print(temp.data+" ");
             temp=temp.addr;
 
         }
+        System.out.println(" ");
 
     }
 

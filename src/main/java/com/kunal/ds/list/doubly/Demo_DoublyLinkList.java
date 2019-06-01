@@ -1,4 +1,4 @@
-package com.kunal.ds.list;
+package com.kunal.ds.list.doubly;
 
 public class Demo_DoublyLinkList {
 

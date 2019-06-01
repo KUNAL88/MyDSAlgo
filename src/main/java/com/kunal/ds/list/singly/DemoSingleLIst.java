@@ -1,4 +1,4 @@
-package com.kunal.ds.list.singly.list;
+package com.kunal.ds.list.singly;
 
 public class DemoSingleLIst {
 
