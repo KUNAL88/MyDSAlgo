@@ -19,7 +19,7 @@ public class FindNthFromLast {
         };
 
         init.init();
-        list_instance.display();
+        list_instance.display(list_instance.getStart());
 
         //Test 1st item
         list_instance.findNthFromLast(2);

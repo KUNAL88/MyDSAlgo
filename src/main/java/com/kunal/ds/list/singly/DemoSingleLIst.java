@@ -17,7 +17,7 @@ public class DemoSingleLIst {
 
         object.search(100);
 
-        object.display();
+        object.display(object.getStart());
     }
 
 }
