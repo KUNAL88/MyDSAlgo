@@ -8,6 +8,133 @@ public class SingleLinkList {
         return start;
     }
 
+    public boolean isPalindrom(Node startPtr){
+
+        boolean isPalindrom=true;
+        if(startPtr==null || this.lengthOfList(startPtr)==1){
+            return isPalindrom;
+        }
+
+        double lengthOflist=this.lengthOfList(startPtr);
+        double mid=Math.ceil(lengthOflist/2);
+        Node temp=startPtr;
+        double count=1;
+        while (count!=mid){
+            temp=temp.addr;
+            count++;
+        }
+
+        Node originalStart=start;
+        this.display(originalStart);
+        start=temp.addr;
+        this.reverseLinklist(temp.addr);
+       this.display(start);
+         while (start!=null){
+            if(start.data!=originalStart.data){
+                isPalindrom=false;
+                break;
+            }
+            start=start.addr;
+            originalStart=originalStart.addr;
+        }
+        return isPalindrom;
+    }
+
+    public Node removeDuplicateFromSortedList(Node startPtr){
+
+        if(startPtr==null || this.lengthOfList(startPtr)==1){
+            return startPtr;
+        }
+
+        int currentVal=startPtr.data;
+        Node previous=startPtr;
+        Node temp=startPtr.addr;
+        while (previous.addr!=null){
+
+            if(temp==null){
+                previous.addr=temp;
+                break;
+            }
+
+            if(temp.data!=currentVal){
+                previous.addr=temp;
+                currentVal=temp.data;
+                previous=temp;
+            }
+
+            temp=temp.addr;
+        }
+
+        return startPtr;
+    }
+
+    public Node deleteMiddle(Node startPtr,int indexToDelete){
+
+       if(startPtr==null || indexToDelete<=0)
+           return startPtr;
+
+       if(indexToDelete>this.lengthOfList(startPtr))
+           return startPtr;
+
+       if(indexToDelete==1){
+           start=start.addr;
+           return start;
+       }else {
+           Node temp=start;
+           int indexCounter=1;
+           while (indexCounter+1!=indexToDelete){
+                temp=temp.addr;
+                indexCounter++;
+           }
+           temp.addr=temp.addr.addr;
+           return start;
+       }
+    }
+
+    public int lengthOfList(Node list){
+
+        if(list==null)
+            return 0;
+        else {
+            int temp=0;
+            while (list!=null){
+                temp++;
+                list=list.addr;
+            }
+            return temp;
+        }
+    }
+
+    public Node revertKBlock(Node list,int k){
+
+        if(list==null || k > this.lengthOfList(list)){
+            return list;
+        }
+
+        Node temp=list;
+        int tempCount=1;
+        while (tempCount!=k){
+            tempCount++;
+            temp=temp.addr;
+        }
+        revertK(start,temp.addr,1,k);
+
+        return start;
+    }
+
+    private Node revertK(Node current,Node previous,int currentCount,int k){
+
+        if(currentCount!=k){
+            revertK(current.addr,current,++currentCount,k);
+            current.addr=previous;
+        }else {
+            start=current;
+            current.addr=previous;
+        }
+
+        return current;
+    }
+
 public Node mergeTwoSortedList(Node list_A,Node list_B){
 
         if(list_A==null && list_B==null){
