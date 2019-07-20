@@ -4,6 +4,90 @@ public class SingleLinkList {
 
     private Node start=null;
 
+    public void addItemAtEnd(int data){
+
+        Node node=new Node(data,null);
+        if(start==null){
+            start=node;
+        }else {
+            Node temp=start;
+            while (temp.addr!=null)
+            {
+                temp=temp.addr;
+            }
+            temp.addr=node;
+        }
+    }
+
+    public Node addTwoList(Node A,Node B){
+
+        if(A==null && B==null){
+            return null;
+        }else if(A!=null && B==null){
+            return A;
+        }else if(A==null && B!=null){
+            return B;
+        }
+        SingleLinkList list3=new SingleLinkList();
+        int carry=0;
+        while (A!=null || B!=null){
+
+            if(A!=null && B!=null){
+                carry=addTwoInt(carry+A.data,B.data,list3);
+                A=A.addr;       B=B.addr;
+            }else if(A==null && B!=null){
+                carry=addTwoInt(carry,B.data,list3);
+                B=B.addr;
+            }else if(A!=null && B==null){
+                carry=addTwoInt(A.data,carry,list3);
+                A=A.addr;
+            }
+
+        }
+
+        if(carry>0){
+            addItemAtEnd(carry);
+        }
+
+        return list3.getStart();
+    }
+
+   /* private int add(Node a,Node b,SingleLinkList c){
+
+        int carry=-1;
+
+        if(a.addr!=null && b.addr!=null){
+            carry=add(a.addr,b.addr,c);
+            return addTwoInt(carry+a.data,b.data,c);
+        }else if(a==null && b.addr!=null){
+            carry=add(a,b.addr,c);
+            return addTwoInt();
+        }else if(a.addr!=null && b.addr==null){
+            carry=add(a.addr,b,c);
+        }else {
+
+                return addTwoInt(a.data,b.data,c);
+            }
+
+    }*/
+
+    private int addTwoInt(int a,int b,SingleLinkList c) {
+        int r = a + b;
+
+        if (r == 10) {
+            c.addItemAtEnd(0);
+            return 1;
+        } else if(r<10){
+            c.addItemAtEnd(r);
+            return 0;
+        }else {
+            int quetient = r / 10;
+            int remainder = r % 10;
+            c.addItemAtEnd(quetient);
+            return remainder;
+        }
+    }
+
     public Node getStart() {
         return start;
     }

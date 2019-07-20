@@ -9,13 +9,13 @@ public class Palindrom {
         SingleLinkList list=new SingleLinkList();
 
         list.addNodeAtStart(1);
-       /* list.addNodeAtStart(2);
+        list.addNodeAtStart(2);
         list.addNodeAtStart(3);
-        list.addNodeAtStart(4);
+        list.addNodeAtStart(6);
         list.addNodeAtStart(4);
         list.addNodeAtStart(3);
         list.addNodeAtStart(2);
-        list.addNodeAtStart(1);*/
+        list.addNodeAtStart(1);
 
         list.display(list.getStart());
         if(list.isPalindrom(list.getStart())) {
