@@ -1,6 +1,6 @@
 package com.kunal.algo.gt.traversal;
 
-import com.kunal.ds.stack.Stack_Array;
+import com.kunal.ds.stack.impl.Stack_Array;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,12 +39,14 @@ public class DFS {
         int startNode=0;
         String node_visited_seq="  "+startNode;
 
-        Stack_Array.push(startNode);
+        Integer[] a=new Integer[50];
+        Stack_Array<Integer> stack_array=new Stack_Array<>(a);
+        stack_array.push(startNode);
         isVisited[startNode]=true;
 
-        while (!Stack_Array.isEmpty()){
+        while (!stack_array.isEmpty()){
 
-            currentNode=Stack_Array.pop();
+            currentNode=stack_array.pop();
             List<NodeWeight> path=graph[currentNode];
 
             Iterator<NodeWeight> pathItr=path.iterator();
@@ -55,7 +57,7 @@ public class DFS {
                  if(isVisited[nwt.getNode()]==false){
 
                      isVisited[nwt.getNode()]=true;
-                     Stack_Array.push(nwt.getNode());
+                     stack_array.push(nwt.getNode());
                      node_visited_seq=node_visited_seq+" "+nwt.getNode();
                  }
             }

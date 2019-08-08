@@ -1,4 +1,4 @@
-package com.kunal.ds.que;
+package com.kunal.ds.queue;
 
 public class Queue_List {
 

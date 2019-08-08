@@ -1,28 +1,39 @@
-package com.kunal.ds.stack;
+package com.kunal.ds.stack.impl;
 
-public class Stack_Array {
+public class Stack_Array<T> {
 
     private static int top=-1;
     private static int sizeOfStack=50;
-    private static int[] stack=new int[sizeOfStack];
+    private  T[] stack;//=new T[sizeOfStack];
+    private T popedItem;
 
+    public Stack_Array(T[] array){
+        stack=array;
+    }
 
     public static void main(String[] args) {
 
-        pop();
+        Integer[] i=new Integer[sizeOfStack];
+        Stack_Array<Integer> stack_array=new Stack_Array<Integer>(i);
 
-        push(10);
-        push(200);
-        push(300);
+        stack_array.pop();
+        stack_array.push(10);
 
-        pop();
-        pop();
-        pop();
-        pop();
+        stack_array.push(200);
+        stack_array.push(300);
 
-        push(600);
-        pop();
+        stack_array.push(600);
+        stack_array.pop();
 
+        String[] s=new String[sizeOfStack];
+        Stack_Array<String> stack_array_string=new Stack_Array<String>(s);
+
+        stack_array_string.push("kunal");
+        stack_array_string.push("Shikha");
+        stack_array_string.push("Shivam");
+
+        stack_array_string.pop();  stack_array.pop();  stack_array.pop();
+        stack_array_string.push("tolu");
 
     }
 /*
@@ -36,7 +47,16 @@ Initialize : top=-1 , sizeOfStack=n; stack[n]
 2. Exit
  */
 
-    public static void push(int data){
+    public T topOfStck(){
+
+        if(!this.isEmpty()){
+            return this.stack[top];
+        }else {
+            return null;
+        }
+    }
+
+    public  void push(T data){
 
         if(top==sizeOfStack-1){
             System.out.println(" StackOverFlow ....");
@@ -60,9 +80,9 @@ Initialize : top=-1 , sizeOfStack=n; stack[n]
 2. Exit
   */
 
-    public static int pop(){
+    public  T pop(){
 
-        int popedItem=-1;
+        // popedItem=-1;
 
         if(top==-1){
             System.out.println(" Stack is empty ...");
@@ -75,7 +95,7 @@ Initialize : top=-1 , sizeOfStack=n; stack[n]
         return popedItem;
     }
 
-    public static boolean isEmpty(){
+    public  boolean isEmpty(){
 
         if(top==-1){
             return true;

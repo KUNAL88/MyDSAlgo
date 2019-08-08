@@ -1,4 +1,4 @@
-package com.kunal.ds.stack;
+package com.kunal.ds.stack.impl;
 
 public class Stack_List {
 

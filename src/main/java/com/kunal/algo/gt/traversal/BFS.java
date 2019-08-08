@@ -1,6 +1,6 @@
 package com.kunal.algo.gt.traversal;
 
-import com.kunal.ds.que.Queue_Array;
+import com.kunal.ds.queue.Queue_Array;
 
 import java.io.BufferedReader;
 import java.io.IOException;
