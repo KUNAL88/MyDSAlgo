@@ -63,7 +63,7 @@ Initialize : top=-1 , sizeOfStack=n; stack[n]
         }else {
             top++;
             stack[top]=data;
-            System.out.println(" Item pushed successfully ... "+stack[top]);
+          //  System.out.println(" Item pushed successfully ... "+stack[top]);
         }
 
 
@@ -88,7 +88,7 @@ Initialize : top=-1 , sizeOfStack=n; stack[n]
             System.out.println(" Stack is empty ...");
         }else {
             popedItem=stack[top];
-            System.out.println("Item Removed from Stack is "+popedItem);
+           // System.out.println("Item Removed from Stack is "+popedItem);
             top--;
         }
 
