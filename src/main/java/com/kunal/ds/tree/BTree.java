@@ -1,8 +1,15 @@
 package com.kunal.ds.tree;
 
+import com.kunal.ds.queue.Queue_Array;
+import com.kunal.ds.stack.impl.Stack_Array;
+
 public class BTree {
 
     private Node root=null;
+
+    public Node getRoot() {
+        return root;
+    }
 
     public void add(int data){
         addData(data,root);
@@ -18,6 +25,90 @@ public class BTree {
 
     public void displayPostOrder(){
         postOrderTraversal(root);
+    }
+
+    public void reverseLevelOrderTraversal(Node parent){
+        if(parent==null){
+            System.out.println(" Tree is empty ...");
+        }
+       //Initialize queue and stack
+        Node[] array=new Node[50];
+        Node[] array1=new Node[50];
+        Queue_Array queue=new Queue_Array(array);
+        Stack_Array stack=new Stack_Array(array1);
+
+        queue.EnQueue(parent);
+        while (!queue.isQueueEmpty()){
+            Node currentNode=(Node) queue.DeQueue();
+            stack.push(currentNode);
+
+            if(currentNode.left!=null){
+                queue.EnQueue(currentNode.left);
+            }
+
+            if(currentNode.right!=null){
+                queue.EnQueue(currentNode.right);
+            }
+        }
+        Node currentNode=null;
+        while (!stack.isEmpty()){
+            currentNode=(Node)stack.pop();
+            System.out.print( currentNode.data+" ");
+        }
+
+    }
+
+    public void levelOrderTraversal(Node parent){
+
+        if(parent==null){
+            System.out.println(" Tree is empty ...");
+        }
+        Node[] array=new Node[50];
+        Queue_Array queue=new Queue_Array(array);
+        queue.EnQueue(parent);
+
+        while (!queue.isQueueEmpty()){
+            Node currentNode=(Node) queue.DeQueue();
+            System.out.print(currentNode.data+" ");
+
+            if(currentNode.left!=null){
+                queue.EnQueue(currentNode.left);
+            }
+
+            if(currentNode.right!=null){
+                queue.EnQueue(currentNode.right);
+            }
+        }
+
+    }
+
+    public int maxValue(Node parent){
+        int max=-999999999;
+        if(parent==null){
+            System.out.println(" Tree is empty ...");
+            return max;
+        }
+        Node[] array=new Node[50];
+        Queue_Array queue=new Queue_Array(array);
+        queue.EnQueue(parent);
+
+        while (!queue.isQueueEmpty()){
+            Node currentNode=(Node) queue.DeQueue();
+            if(currentNode.data>max){
+                max=currentNode.data;
+            }
+
+            if(currentNode.left!=null){
+                queue.EnQueue(currentNode.left);
+            }
+
+            if(currentNode.right!=null){
+                queue.EnQueue(currentNode.right);
+            }
+        }
+
+        return max;
+
     }
 
 
@@ -60,9 +151,9 @@ public class BTree {
     private void inOrderTraversal(Node parent){
 
         if(parent!=null){
-            preOrderTraversal(parent.left);
+            inOrderTraversal(parent.left);
             System.out.println(parent.data);
-            preOrderTraversal(parent.right);
+            inOrderTraversal(parent.right);
         }
     }
 
@@ -75,6 +166,51 @@ public class BTree {
         }
     }
 
+    public int heightOfTree(Node parent){
+
+        int leftSubTreeHT=0,rightSubtreeHT=0;
+        if(parent==null){
+            return 0;
+        }
+
+        leftSubTreeHT=heightOfTree(parent.left)+1;
+        rightSubtreeHT=heightOfTree(parent.right)+1;
+
+        if(leftSubTreeHT>rightSubtreeHT){
+            return leftSubTreeHT;
+        }else {
+            return rightSubtreeHT;
+        }
+    }
+
+    public int findDeepestNode(Node parent){
+
+        if(parent==null){
+            return 0;
+        }
+
+        Node currentNode=null;
+        Node[] array=new Node[50];
+        Queue_Array<Node> queue=new Queue_Array<>(array);
+        queue.EnQueue(parent);
+
+        while (!queue.isQueueEmpty()){
+            currentNode=queue.DeQueue();
+
+            if(currentNode.left!=null){
+                queue.EnQueue(currentNode.left);
+            }
+
+            if(currentNode.right!=null){
+                queue.EnQueue(currentNode.right);
+            }
+        }
+
+        return currentNode.data;
+    }
+
+
+
 }
 
 class Node{
@@ -82,7 +218,6 @@ class Node{
     Node left;
     int data;
     Node right;
-
 
     Node(Node left,int data,Node right){
         this.left=left;

@@ -27,8 +27,15 @@ public class MyThread implements Runnable {
      */
     @Override
     public void run() {
-       // d.display(name);
+        d.display(name);
        // d.display_1(name);
         DisplayInfo.display_2(name);
     }
+
+   /* Runnable r=()->{
+        for(int i=0;i<10;i++){
+            System.out.println("Kunal");
+        }
+
+    };*/
 }

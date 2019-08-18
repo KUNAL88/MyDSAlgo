@@ -5,10 +5,9 @@ import com.kunal.ds.stack.impl.Stack_Array;
 public class RainWaterTrapped {
 
     public static void main(String[] args) {
-       // int[] A={0,1,0,2,1,0,1,3,2,1,2,1};
+      //  int[] A={0,1,0,2,1,0,1,3,2,1,2,1};
         //0,1,5,1,6,
         int[] A={7,0,1,5,1,6,7};
-
         System.out.println(new RainWaterTrapped().trap(A));
 
     }

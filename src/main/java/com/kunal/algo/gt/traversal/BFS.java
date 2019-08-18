@@ -88,18 +88,19 @@ public class BFS {
 
         int currentVertex=0;
         String visited_node_sequence=""+currentVertex;
-
-        Queue_Array.EnQueue(0);
+        Integer[] array=new Integer[50];
+        Queue_Array queue=new Queue_Array(array);
+        queue.EnQueue(0);
         isVisited[currentVertex]=true;
 
-        while (!Queue_Array.isQueueEmpty()){
+        while (!queue.isQueueEmpty()){
 
-            currentVertex=Queue_Array.DeQueue();
+            currentVertex=(Integer) queue.DeQueue();
 
             for(int i=0;i<num_of_nodes;i++){
 
                 if(isVisited[i]==false && graph[currentVertex][i]!=0){
-                    Queue_Array.EnQueue(i);
+                    queue.EnQueue(i);
                     isVisited[i]=true;
                     visited_node_sequence=visited_node_sequence+" "+i;
 

@@ -1,15 +1,19 @@
 package com.kunal.ds.queue;
 
-public class Queue_Array {
+public class Queue_Array<T> {
 
-    static int front=-1;
-    static int rare=-1;
-    static int sizeOfQueue=50;
-    static int[] queue=new int[sizeOfQueue];
+     private int front=-1;
+     private int rare=-1;
+     private int sizeOfQueue=50;
+     //private int[] queue=new int[sizeOfQueue];
+     private T[] queue;
+     public Queue_Array(T[] queue){
+            this.queue=queue;
+     }
 
     public static void main(String[] args) {
 
-        DeQueue();
+      /*  DeQueue();
         EnQueue(10);
         EnQueue(20);
         EnQueue(30);
@@ -22,14 +26,22 @@ public class Queue_Array {
         DeQueue();
         DeQueue();
         DeQueue();
-        DeQueue();
+        DeQueue();*/
 
     }
 
-    public static void EnQueue(int data){
+    public int getFront() {
+        return front;
+    }
+
+    public int getRare() {
+        return rare;
+    }
+
+    public  void EnQueue(T data){
 
         if((rare+1)%sizeOfQueue==front){
-            System.out.println("Queue is Full ............");
+          //  System.out.println("Queue is Full ............");
         }else {
 
             if(rare==-1 && front==-1){
@@ -39,35 +51,35 @@ public class Queue_Array {
             rare=(rare+1)%sizeOfQueue;
             queue[rare]=data;
 
-            System.out.println("Data Added Successfully .... "+queue[rare]);
+           // System.out.println("Data Added Successfully .... "+queue[rare]);
 
         }
 
 
     }
 
-    public static int DeQueue(){
+    public  T DeQueue(){
 
-       int deQueueItem=-1;
+       T deQueueItem=null;
         if(front==-1){
-            System.out.println(" Queue is Empty ....");
+           // System.out.println(" Queue is Empty ....");
         }else {
 
             if(front==rare){
                 deQueueItem=queue[front];
-            System.out.println(" Data Removed is : "+deQueueItem);
+          //  System.out.println(" Data Removed is : "+deQueueItem);
             front=-1;
             rare=-1;
             }else {
                 deQueueItem=queue[front];
-                System.out.println(" Data Removed is : "+deQueueItem);
+           //     System.out.println(" Data Removed is : "+deQueueItem);
                 front=(front+1)%sizeOfQueue;
             }
         }
         return deQueueItem;
     }
 
-    public static boolean isQueueEmpty(){
+    public boolean isQueueEmpty(){
 
         if(front==-1 && rare==-1){
             return true;

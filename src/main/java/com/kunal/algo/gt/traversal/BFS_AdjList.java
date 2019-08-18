@@ -47,12 +47,14 @@ public class BFS_AdjList {
         int currentNode=0;
         int startNode=0;
         String node_visited_seq="  "+startNode;
-        Queue_Array.EnQueue(startNode);
+        Integer[] array=new Integer[50];
+        Queue_Array queue=new Queue_Array(array);
+        queue.EnQueue(startNode);
         isVisited[startNode]=true;
 
-        while (!Queue_Array.isQueueEmpty()){
+        while (!queue.isQueueEmpty()){
 
-            currentNode=Queue_Array.DeQueue();
+            currentNode=(Integer) queue.DeQueue();
             List<NodeWeight> path=graph[currentNode];
 
             Iterator<NodeWeight> pathItr=path.iterator();
@@ -61,7 +63,7 @@ public class BFS_AdjList {
                 nwt=pathItr.next();
 
                 if(isVisited[nwt.getNode()]==false){
-                    Queue_Array.EnQueue(nwt.getNode());
+                    queue.EnQueue(nwt.getNode());
                     isVisited[nwt.getNode()]=true;
                     node_visited_seq=node_visited_seq+nwt.getNode();
                 }

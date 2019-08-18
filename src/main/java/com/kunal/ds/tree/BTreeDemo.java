@@ -12,15 +12,27 @@ public class BTreeDemo {
         tree.add(200);
         tree.add(5);
         tree.add(1);
+        tree.add(150);
+        tree.add(210);
+        tree.add(211);
 
-        System.out.println(" --- InOrderTraversal --- ");
+      /*  System.out.println(" --- InOrderTraversal --- ");
         tree.displayInOrder();
 
         System.out.println(" --- PreOrderTraversal --- ");
         tree.displayPreOrder();
 
         System.out.println(" --- PostOrderTraversal --- ");
-        tree.displayPostOrder();
+        tree.displayPostOrder();*/
+
+     /* tree.levelOrderTraversal(tree.getRoot());
+      System.out.print("\n");
+      tree.reverseLevelOrderTraversal(tree.getRoot());*//*
+
+    // System.out.print(tree.maxValue(tree.getRoot()));
+        System.out.println(tree.heightOfTree(tree.getRoot()));*/
+
+        System.out.println(tree.findDeepestNode(tree.getRoot()));
 
     }
 }
