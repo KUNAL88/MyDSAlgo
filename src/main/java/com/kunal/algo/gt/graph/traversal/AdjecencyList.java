@@ -1,4 +1,4 @@
-package com.kunal.algo.gt.traversal;
+package com.kunal.algo.gt.graph.traversal;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

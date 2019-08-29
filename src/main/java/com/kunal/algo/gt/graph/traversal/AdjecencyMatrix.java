@@ -1,4 +1,4 @@
-package com.kunal.algo.gt.traversal;
+package com.kunal.algo.gt.graph.traversal;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.kunal.algo.gt.traversal;
+package com.kunal.algo.gt.graph.traversal;
 
-import com.kunal.ds.queue.Queue_Array;
+import com.kunal.ds.stack.impl.Stack_Array;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,22 +8,13 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 
-
-/*
-This class calculate BFS using adj list ...
-
- */
-
-//dvbjsvskndsfdsfdsfjsdjs
-
-
-public class BFS_AdjList {
+public class DFS {
 
     private static BufferedReader br;
     private static int num_of_nodes;
     private static AdjecencyList adjList;
 
-    public static void buildBFSTraversal(){
+    private static void buildDFSTraversal(){
 
         br=new BufferedReader(new InputStreamReader(System.in));
 
@@ -47,35 +38,35 @@ public class BFS_AdjList {
         int currentNode=0;
         int startNode=0;
         String node_visited_seq="  "+startNode;
-        Integer[] array=new Integer[50];
-        Queue_Array queue=new Queue_Array(array);
-        queue.EnQueue(startNode);
+
+        Integer[] a=new Integer[50];
+        Stack_Array<Integer> stack_array=new Stack_Array<>(a);
+        stack_array.push(startNode);
         isVisited[startNode]=true;
 
-        while (!queue.isQueueEmpty()){
+        while (!stack_array.isEmpty()){
 
-            currentNode=(Integer) queue.DeQueue();
+            currentNode=stack_array.pop();
             List<NodeWeight> path=graph[currentNode];
 
             Iterator<NodeWeight> pathItr=path.iterator();
             while (pathItr.hasNext()){
 
-                nwt=pathItr.next();
+                 nwt=pathItr.next();
 
-                if(isVisited[nwt.getNode()]==false){
-                    queue.EnQueue(nwt.getNode());
-                    isVisited[nwt.getNode()]=true;
-                    node_visited_seq=node_visited_seq+nwt.getNode();
-                }
+                 if(isVisited[nwt.getNode()]==false){
+
+                     isVisited[nwt.getNode()]=true;
+                     stack_array.push(nwt.getNode());
+                     node_visited_seq=node_visited_seq+" "+nwt.getNode();
+                 }
             }
         }
-
-        System.out.println("Node Visited in following Sequence : "+node_visited_seq);
-
+            System.out.println(" Node Visited in following sequence : "+node_visited_seq);
     }
 
     public static void main(String[] args) {
 
-        buildBFSTraversal();
+        buildDFSTraversal();
     }
 }

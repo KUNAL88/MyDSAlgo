@@ -1,15 +1,17 @@
-package com.kunal.algo.gt.traversal;
+package com.kunal.algo.gt.graph.spanningtree;
 
-import com.kunal.ds.queue.Queue_Array;
+import com.kunal.algo.gt.graph.traversal.AdjecencyMatrix;
+import com.kunal.algo.gt.graph.traversal.Weight;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class BFS {
+public class TopologicalSort {
 
     private static boolean[] isVisited;
     private static Queue queue;
@@ -22,8 +24,7 @@ public class BFS {
     private static List<Weight> node_direction_list;
     private static boolean isDone=false;
 
-    private static void initialize(){
-
+    public static void init(){
         br=new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println(" Enter Number of Nodes in your Graph ...");
@@ -57,8 +58,8 @@ public class BFS {
                 wt=Integer.parseInt(br.readLine());
 
                 if(src >= num_of_nodes || dst >= num_of_nodes){
-                        System.out.println("Error : source/destination index can not be grater than "+num_of_nodes);
-                        System.exit(0);
+                    System.out.println("Error : source/destination index can not be grater than "+num_of_nodes);
+                    System.exit(0);
                 }
 
                 weight=new Weight();
@@ -79,44 +80,66 @@ public class BFS {
 
             System.out.println("IOException Encountered ... "+e);
         }
-        graph= adjecency_matrix.assignWeightToGraph(graph,false,node_direction_list);
+        graph= adjecency_matrix.assignWeightToGraph(graph,true,node_direction_list);
     }
 
-    private static void buildBFSGraphTraversal(){
-        initialize();
-        System.out.println("Graph is SuccessFully Created ......");
 
-        int currentVertex=0;
-        String visited_node_sequence=""+currentVertex;
-        Integer[] array=new Integer[50];
-        Queue_Array queue=new Queue_Array(array);
-        queue.EnQueue(0);
-        isVisited[currentVertex]=true;
+    public static void main(String[] args) {
+        init();
+        int[] indgree=inDgree();
 
-        while (!queue.isQueueEmpty()){
+        for(int i=0;i<num_of_nodes;i++){
+            System.out.println(i+" -- "+indgree[i]);
+        }
 
-            currentVertex=(Integer) queue.DeQueue();
+        boolean[] isVisited=new boolean[num_of_nodes];
+        for(int i=0;i<num_of_nodes;i++){
+            isVisited[i]=false;
+        }
 
-            for(int i=0;i<num_of_nodes;i++){
+        Queue<Integer> queue=new PriorityQueue<>();
+        for(int i=0;i<num_of_nodes;i++){
 
-                if(isVisited[i]==false && graph[currentVertex][i]!=0){
-                    queue.EnQueue(i);
-                    isVisited[i]=true;
-                    visited_node_sequence=visited_node_sequence+" "+i;
-
-                }
+            if(indgree[i]==0){
+                queue.add(i);
+                isVisited[i]=true;
             }
         }
 
-        System.out.println("Node Visited in following Sequence : "+visited_node_sequence);
+        StringBuilder sb=new StringBuilder();
+        int vertex=0;
+        while (!queue.isEmpty()){
+                vertex=queue.remove();
+                sb.append(vertex+" ");
+                for(int j=0;j<num_of_nodes;j++){
 
+                    if(!isVisited[j] && graph[vertex][j]>0){
+
+                        --indgree[j];
+                        if(indgree[j]==0){
+                            queue.add(j);
+                        }
+                    }
+                }
+        }
     }
 
-    public static void main(String[] args) {
 
-        buildBFSGraphTraversal();
+    public static int[] inDgree(){
 
+        int[] indgree=new int[num_of_nodes];
+
+        int count=0;
+        for(int i=0;i<num_of_nodes;i++){
+            for(int j=0;j<num_of_nodes;j++){
+                if(graph[j][i]>0){
+                    count++;
+                }
+            }
+            indgree[i]=count;
+            count=0;
+        }
+
+        return indgree;
     }
-
-
 }
