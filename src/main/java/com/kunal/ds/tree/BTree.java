@@ -209,7 +209,71 @@ public class BTree {
         return currentNode.data;
     }
 
+    public void zigzagTraversal(Node parent,int level){
 
+        if(parent==null){
+            System.out.println(" Tree is empty ... ");
+            return;
+        }
+        DataLevel tempDataLevel=null;
+        DataLevel[] array=new DataLevel[50];
+        Queue_Array<DataLevel> queue=new Queue_Array<>(array);
+        queue.EnQueue(new DataLevel(parent,0));
+
+        DataLevel[] reverseData=new DataLevel[50];
+        Stack_Array<DataLevel> stack=new Stack_Array<>(reverseData);
+
+        while (!queue.isQueueEmpty()){
+            tempDataLevel=queue.DeQueue();
+
+            if(tempDataLevel.getData().left!=null){
+                queue.EnQueue(new DataLevel(tempDataLevel.getData().left
+                        ,tempDataLevel.getLevel()+1));
+            }
+
+            if(tempDataLevel.getData().right!=null){
+                queue.EnQueue(new DataLevel(tempDataLevel.getData().right
+                        ,tempDataLevel.getLevel()+1));
+            }
+
+            while (!stack.isEmpty() && stack.topOfStck().getLevel()<tempDataLevel.getLevel() )
+            {
+                System.out.print(stack.pop().getData().data+" - ");
+            }
+
+            if(tempDataLevel.getLevel()%2==0){
+
+                stack.push(tempDataLevel);
+
+            }else {
+                System.out.print(tempDataLevel.getData().data+"  ");
+            }
+        }
+
+        while (!stack.isEmpty()  )
+        {
+            System.out.print(stack.pop().getData().data+" - ");
+        }
+    }
+
+    public boolean isSymmetricTree(Node parent1,Node parent2){
+
+        if(parent1==null && parent2==null){
+            return true;
+        }
+
+        if((parent1==null && parent2!=null) || (parent1!=null && parent2==null)){
+            return false;
+        }
+
+        if(parent1.data==parent2.data
+                && isSymmetricTree(parent1.left,parent2.left)
+                && isSymmetricTree(parent1.right,parent2.right)){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }
 
@@ -223,5 +287,24 @@ class Node{
         this.left=left;
         this.data=data;
         this.right=right;
+    }
+}
+
+class DataLevel{
+
+    private Node data;
+    private int level;
+
+    public DataLevel(Node data,int level){
+        this.data=data;
+        this.level=level;
+    }
+
+    public Node getData() {
+        return data;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

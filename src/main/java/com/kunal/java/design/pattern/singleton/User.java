@@ -1,7 +1,13 @@
-package com.kunal.java.singleton;
+package com.kunal.java.design.pattern.singleton;
 
+
+/*
+Example of Singleton class in java : Runtime class
+There can only be singleInstance of Runtime
+ */
 public class User {
 
+   // Runtime
     private static User userInstance;
 
     private User(){}
