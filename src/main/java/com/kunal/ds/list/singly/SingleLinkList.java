@@ -1,5 +1,9 @@
 package com.kunal.ds.list.singly;
 
+import com.kunal.ds.stack.impl.Stack_Array;
+
+import java.util.Stack;
+
 public class SingleLinkList {
 
     private Node start=null;
@@ -187,6 +191,205 @@ public class SingleLinkList {
             }
             return temp;
         }
+    }
+
+    public Node reverseLinkList(Node node){
+
+        if(start==null){
+            return null;
+        }
+
+        if(node.addr!=null){
+
+            if(node==start){
+                reverseLinklist(node.addr);
+                node.addr.addr=node;
+                node.addr=null;
+            }else {
+                reverseLinklist(node.addr);
+                node.addr.addr=node;
+            }
+        }else {
+            node=start;
+        }
+
+        return start;
+    }
+
+    public Node pairwiseSwap(Node currentNode){
+
+        Node previous=null;
+        if(currentNode==null || this.lengthOfList(currentNode) <=1){
+            return currentNode;
+        }
+        Node temp=null,temp1=null;
+
+        do {
+
+            temp=currentNode;
+            temp1=currentNode.addr.addr;
+
+            if(currentNode==start){
+                currentNode.addr.addr=currentNode;
+                start=currentNode.addr;
+                currentNode.addr=temp1;
+                previous=temp;
+
+            }else {
+                currentNode.addr.addr=currentNode;
+                previous.addr=currentNode.addr;
+                previous=previous.addr.addr;
+                currentNode.addr=temp1;
+            }
+
+            if(currentNode!=null || currentNode.addr!=null ){
+                currentNode=currentNode.addr;
+            }else {
+                break;
+            }
+            if(currentNode==null){
+                break;
+            }
+
+        }while (temp.addr!=null);
+
+        return start;
+    }
+
+    public void segregateOddEven(Node currentNode){
+
+        if(currentNode==null){
+            return;
+        }
+
+        Node even=null;
+        Node odd=null,startOfOdd=null;
+
+        while (currentNode!=null){
+
+            if(currentNode.data%2==1){
+
+                if(odd==null){
+                    odd=currentNode;
+                    startOfOdd=odd;
+                    currentNode=currentNode.addr;
+                    continue;
+                }
+
+                odd.addr=currentNode;
+                odd=odd.addr;
+                currentNode=currentNode.addr;
+
+            }else {
+
+                if(even==null){
+                    even=currentNode;
+                    start=even;
+                    currentNode=currentNode.addr;
+                    even.addr=null;
+                    continue;
+                }
+
+                even.addr=currentNode;
+                even=even.addr;
+                currentNode=currentNode.addr;
+                even.addr=null;
+            }
+        }
+
+        even.addr=startOfOdd;
+
+    }
+
+    public void moveLastNodeToFirst(Node currentNode){
+
+        if(currentNode==null || this.lengthOfList(currentNode)<=1){
+            return;
+        }
+        Node temp=start;
+        while (temp.addr.addr!=null){
+            temp=temp.addr;
+        }
+
+        temp.addr.addr=start;
+        start=temp.addr;
+        temp.addr=null;
+    }
+
+    public static int count=1;
+    public Node revertFirstK(Node currentNode,int k){
+
+        int lenthOfList=4;//this.lengthOfList(currentNode);
+
+        if(currentNode==null || lenthOfList==1){
+            return currentNode;
+        }
+
+        if(lenthOfList<k){
+            System.out.println(" index of outOfRange  ...");
+            return currentNode;
+        }
+
+        if(count!=k){
+            count++;
+
+            if(currentNode==start){
+                Node temp= revertFirstK(currentNode.addr,k);
+                currentNode.addr.addr=currentNode;
+                currentNode.addr=temp;
+                return start;
+            }else {
+                Node temp= revertFirstK(currentNode.addr,k);
+                currentNode.addr.addr=currentNode;
+                return temp;
+            }
+
+        }else {
+            Node temp= currentNode.addr;
+            start=currentNode;
+            return temp;
+        }
+
+    }
+
+    public Node mergeTwoList(Node list1current,Node list2current,int k){
+
+        while (list1current.data!=k){
+            list1current=list1current.addr;
+        }
+
+        Node temp=list2current;
+        while (list2current.addr!=null){
+            list2current=list2current.addr;
+        }
+
+        list2current.addr=list1current;
+        return temp;
+    }
+
+    public Node mergePointOfLinkList(Node list1CurrentNode,Node list2CurrentNode){
+
+        if(list1CurrentNode==null && list2CurrentNode==null){
+            return null;
+        }else if(list1CurrentNode.addr!=null && list2CurrentNode.addr==null){
+            return list1CurrentNode;
+        }
+
+        int diff=Math.abs(this.lengthOfList(list1CurrentNode)
+                -this.lengthOfList(list2CurrentNode));
+        int length_1=this.lengthOfList(list1CurrentNode);
+        int length_2=this.lengthOfList(list2CurrentNode);
+
+        int count=1; Node temp=list1CurrentNode;
+        while (count!=length_1-diff){
+            temp=temp.addr;
+            count++;
+        }
+
+        return temp.addr;
+
+
+
     }
 
     public Node revertKBlock(Node list,int k){
@@ -446,6 +649,137 @@ Find nth last item in the link list
         }
 
     }
+
+    public Node mergeListInReverseOrder(Node currentNodeList1,
+                                        Node currentNodeList2){
+
+        if(currentNodeList1==null && currentNodeList2==null){
+            return null;
+        }else if(currentNodeList1!=null && currentNodeList2==null) {
+            return currentNodeList1;
+        }else if(currentNodeList1==null && currentNodeList2!=null){
+            return currentNodeList2;
+        }
+
+        Stack<Node> stack=new Stack<>();
+
+        while (currentNodeList1!=null && currentNodeList2!=null){
+
+            if(currentNodeList1.data<=currentNodeList2.data){
+                stack.push(currentNodeList1);
+                currentNodeList1=currentNodeList1.addr;
+            }else {
+                stack.push(currentNodeList2);
+                currentNodeList2=currentNodeList2.addr;
+            }
+        }
+
+        while (currentNodeList1!=null){
+            stack.push(currentNodeList1);
+            currentNodeList1=currentNodeList1.addr;
+        }
+
+        while (currentNodeList2!=null){
+            stack.push(currentNodeList2);
+            currentNodeList2=currentNodeList2.addr;
+        }
+
+        Node start=null,temp=null;
+
+        while (!stack.isEmpty()){
+
+            if(start==null){
+                start=stack.pop();
+                temp=start;
+            }
+
+            temp.addr=stack.pop();
+            temp=temp.addr;
+        }
+
+        temp.addr=null;
+
+        return start;
+    }
+
+    public Node quickSort(Node currentNode,int low,int high){
+
+        if(low<high){
+            int partition=partition(currentNode,low,high);
+
+            quickSort(currentNode,low,partition-1);
+            quickSort(currentNode,partition+1,high);
+        }
+
+        return start;
+    }
+
+    public int partition(Node currentNode,int low,int high){
+
+        if(low==high){
+            return high-1;
+        }
+
+        int count=0;
+        Node temp=currentNode;
+
+        while (count++!=low){
+            temp=temp.addr;
+        }
+        Node partitionNode=temp;
+        Node lowNode=null;
+        Node highNode=null;
+        if(currentNode.addr!=null){
+            lowNode=currentNode.addr;
+            low++;
+        }
+
+        count=low;
+        temp=lowNode;
+        if(low==high){
+            highNode=lowNode;
+        }else {
+            while (++count!=high){
+                temp=temp.addr;
+            }
+            highNode=temp;
+        }
+        int tempData=0;
+        do{
+            while (low<=high && lowNode.data<partitionNode.data){
+                lowNode=lowNode.addr;
+                low++;
+            }
+
+            while (high>low && highNode.data>partitionNode.data){
+                temp=lowNode;
+                while (temp.addr.data!=highNode.data && temp.data!=highNode.data){
+                    temp=temp.addr;
+                }
+                highNode=temp;
+                high--;
+            }
+
+            if(low<high){
+                tempData=lowNode.data;
+                lowNode.data=highNode.data;
+                highNode.data=tempData;
+            }else {
+                break;
+            }
+
+
+
+        }while (low!=high );
+
+        tempData=partitionNode.data;
+        partitionNode.data=highNode.data;
+        highNode.data=tempData;
+
+        return high;
+    }
+
+
 
 }
 
