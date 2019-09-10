@@ -1,4 +1,4 @@
-package com.kunal.java.queue;
+package com.kunal.java.my.thread.queue;
 
 import com.kunal.ds.queue.Queue_Array;
 
@@ -17,12 +17,8 @@ public class Producer<T> implements Runnable {
            count++;
            queue.EnQueue(count);
             System.out.println("produced "+count);
-           try {
-               Thread.sleep(1000);
 
-           }catch (Exception e){
-               System.out.println(e);
-           }
+            queue.notify();
        }
 
 

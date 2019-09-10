@@ -779,6 +779,135 @@ Find nth last item in the link list
         return high;
     }
 
+    public Node deleteRightMax(Node currentNode){
+
+        if(currentNode==null && currentNode.addr==null){
+            return currentNode;
+        }
+
+        if(currentNode.addr.data>currentNode.data && currentNode==start){
+            currentNode=currentNode.addr;
+            start=currentNode;
+        }
+
+        Node previous=start;
+        while (currentNode!=null){
+
+            if(currentNode.addr!=null && currentNode.addr.data>currentNode.data){
+                currentNode=currentNode.addr;
+                previous.addr=currentNode;
+            }else {
+                previous=currentNode;
+                currentNode=currentNode.addr;
+            }
+        }
+
+        return start;
+    }
+
+    public Node rearrangeLinkList(Node currentNode){
+
+        if(currentNode==null || currentNode.addr==null){
+            return currentNode;
+        }
+
+        Node temp1=currentNode;
+        Node temp2=currentNode;
+        Node previous=temp2;
+
+        while (true){
+
+            while (temp2.addr!=null){
+                previous=temp2;
+                temp2=temp2.addr;
+
+            }
+            previous.addr=null;
+            temp2.addr=temp1.addr;
+            temp1.addr=temp2;
+
+            temp1=temp1.addr.addr;
+            if(temp1==null || temp1.addr==null || temp1.addr.addr==null){
+                break;
+            }
+        }
+        return start;
+    }
+
+    /*
+    Rearrange a given list such that it consists of alternating minimum maximum elements
+    -- Solution sort the number
+     */
+
+    /*
+    Find pair for given sum in a sorted singly linked without extra space
+     */
+    private boolean isBorrow=false;
+    private static final int k=10;
+    public Node substractTwoList(Node list1CurrentNode,Node list2CurrentNode){
+
+        Node resultNode=null;
+        Node resultStart=resultNode;
+        int result=0;
+        int a=0,b=0;
+        while (true){
+
+            a=0;   b=0;
+            if(list1CurrentNode==null && list2CurrentNode==null){
+                break;
+            }else {
+
+                if(list1CurrentNode==null && list2CurrentNode==null){
+                    break;
+                }else if(list1CurrentNode==null && list2CurrentNode!=null){
+                    b=list2CurrentNode.data;
+                    list2CurrentNode=list2CurrentNode.addr;
+                }else if(list1CurrentNode!=null && list2CurrentNode==null){
+                    a=list1CurrentNode.data;
+                    list1CurrentNode=list1CurrentNode.addr;
+                }else {
+                    a=list1CurrentNode.data;    list1CurrentNode=list1CurrentNode.addr;
+                    b=list2CurrentNode.data;    list2CurrentNode=list2CurrentNode.addr;
+                }
+
+                if(isBorrow){
+
+                    if(a==0){
+                        a=9;
+                    }else {
+                        a-=1;
+                        isBorrow=false;
+                    }
+                }
+
+                result=substract(a,b);
+
+                if(resultStart==null) {
+                    resultStart = new Node(result, null);
+                    resultNode = resultStart;
+                }else {
+                    resultNode=new Node(result,null);
+                    resultNode.addr=resultStart;
+                    resultStart=resultNode;
+                }
+
+            }
+
+        }
+
+        return resultStart;
+    }
+
+
+    private int substract(int a,int b){
+
+        if(a<b){
+            isBorrow=true;
+            a+=10;
+        }
+
+        return a-b;
+    }
 
 
 }

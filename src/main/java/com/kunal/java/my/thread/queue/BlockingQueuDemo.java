@@ -1,4 +1,4 @@
-package com.kunal.java.queue;
+package com.kunal.java.my.thread.queue;
 
 import com.kunal.ds.queue.Queue_Array;
 

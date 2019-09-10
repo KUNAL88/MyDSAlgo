@@ -1,4 +1,4 @@
-package com.kunal.java.queue;
+package com.kunal.java.my.thread.queue;
 
 import java.util.PriorityQueue;
 import java.util.Queue;

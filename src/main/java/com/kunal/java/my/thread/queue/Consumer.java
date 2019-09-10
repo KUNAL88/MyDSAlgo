@@ -1,4 +1,4 @@
-package com.kunal.java.queue;
+package com.kunal.java.my.thread.queue;
 
 import com.kunal.ds.queue.Queue_Array;
 
@@ -14,9 +14,13 @@ public class Consumer implements Runnable {
     public void run() {
 
         while (true){
+
+        /*    System.out.println("consumed --> "+queue.DeQueue());
+            queue.wait();*/
             try {
-                Thread.sleep(1100);
+              //  Thread.sleep(1100);
                 System.out.println("consumed --> "+queue.DeQueue());
+                queue.wait();
             }catch (Exception e){
                 System.out.println(e);
             }

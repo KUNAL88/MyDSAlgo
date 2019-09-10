@@ -4,19 +4,17 @@ public class DemoSingleLIst {
 
     public static void main(String[] args) {
         SingleLinkList object=new SingleLinkList();
-
-        object.addNodeAtStart(10);
-        object.addNodeAtStart(1);
-        object.addNodeAtStart(15);
-        object.addNodeAtStart(6);
-        object.addNodeAtStart(2);
-       // object.addNodeAtStart(10);
+        object.addItemAtEnd(1);
+        object.addItemAtEnd(0);
+        object.addItemAtEnd(0);
         object.display(object.getStart());
 
-        object.display(object.quickSort(object.getStart(),0,4));
+        SingleLinkList object1=new SingleLinkList();
 
+        object1.addItemAtEnd(1);
 
-
+        object.display(object.substractTwoList(object.reverseLinkList(object.getStart())
+                ,object1.reverseLinkList(object1.getStart())));
 
     }
 
