@@ -3,6 +3,8 @@ package com.kunal.ds.tree;
 import com.kunal.ds.queue.Queue_Array;
 import com.kunal.ds.stack.impl.Stack_Array;
 
+import java.util.*;
+
 public class BTree {
 
     private Node root=null;
@@ -25,6 +27,30 @@ public class BTree {
 
     public void displayPostOrder(){
         postOrderTraversal(root);
+    }
+
+   // Map<Integer,Integer> verticalOrdermap=new HashMap<>();
+    public Map<Integer,List<Integer>> verticalOrderTraversal(Node currentNode,int verticalOrder){
+
+        if(currentNode==null){
+            return map;
+        }else {
+
+            List<Integer> list=null;
+            if(!map.containsKey(verticalOrder)){
+                list=new LinkedList<>();
+                list.add(currentNode.data);
+                map.put(verticalOrder,list);
+            }else {
+                list=map.get(verticalOrder);
+                list.add(currentNode.data);
+                map.put(verticalOrder,list);
+            }
+
+            this.verticalOrderTraversal(currentNode.left,--verticalOrder);
+            this.verticalOrderTraversal(currentNode.right,++verticalOrder);
+            return map;
+        }
     }
 
     public void reverseLevelOrderTraversal(Node parent){
@@ -273,6 +299,77 @@ public class BTree {
         }else {
             return false;
         }
+    }
+
+    Queue_Array<Integer> queue=new Queue_Array<>(new Integer[30]);
+    public void reverseTreePath(Node currentNode){
+
+        if(currentNode!=null){
+            queue.EnQueue(currentNode.data);
+            reverseTreePath(currentNode.left);
+            currentNode.data=queue.DeQueue();
+           // reverseTreePath(currentNode.right);
+        }
+    }
+
+    Map<Integer,List<Integer>> map=new HashMap<>();
+
+
+    public void diagonalTraversal(Node currentNode,Integer diagonalIndex){
+
+        if(currentNode!=null){
+
+           if(!map.containsKey(diagonalIndex)){
+               List<Integer> arrayList=new ArrayList<>();
+               arrayList.add(currentNode.data);
+               map.put(diagonalIndex,arrayList);
+           } else {
+               map.get(diagonalIndex).add(currentNode.data);
+           }
+
+           if(currentNode.right!=null){
+                diagonalTraversal(currentNode.right,diagonalIndex);
+           }
+
+           if(currentNode.left!=null){
+               diagonalTraversal(currentNode.left,diagonalIndex+1);
+           }
+        }
+
+    }
+
+
+    public Node createMirrorOfTree(Node currentNode){
+
+        if(currentNode==null){
+            return currentNode;
+        }
+
+        Node temp=currentNode.left;
+        currentNode.left=currentNode.right;
+        currentNode.right=temp;
+
+        createMirrorOfTree(currentNode.left);
+        createMirrorOfTree(currentNode.right);
+
+        return currentNode;
+    }
+
+    public boolean isPathSumExists(Node currentNode,int sum){
+       boolean flag=false;
+       if(sum==0){
+           flag= true;
+       }else if(currentNode==null){
+            flag= false;
+        }else {
+
+           flag=isPathSumExists(currentNode.left,sum-currentNode.data);
+
+          if(!flag){
+              flag=isPathSumExists(currentNode.right,sum-currentNode.data);
+          }
+       }
+        return flag;
     }
 
 }

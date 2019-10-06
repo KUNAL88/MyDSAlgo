@@ -1,5 +1,6 @@
 package com.kunal.java.my.thread.advance;
 
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ReentranedLockDemo {
@@ -21,6 +22,9 @@ public class ReentranedLockDemo {
         rl.unlock();
         System.out.println(rl.isLocked());
         System.out.println(rl.isFair());
+
+        Lock l=new ReentrantLock();
+        //l.
     }
 
 }

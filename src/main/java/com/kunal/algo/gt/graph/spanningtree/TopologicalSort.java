@@ -27,7 +27,7 @@ public class TopologicalSort {
     public static void init(){
         br=new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println(" Enter Number of Nodes in your Graph ...");
+        System.out.println(" Enter Number of Nodes in your Grap h ...");
 
         try {
             num_of_nodes=Integer.parseInt(br.readLine());

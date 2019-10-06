@@ -8,3 +8,9 @@ public class InsufficientFundException extends RuntimeException {
         super(s);
     }
 }
+
+//runtime Exception
+/*
+nullpointerexception, arrayIndexOFBound, concurrentModification, IllegalMonitorStateException
+classCastException
+ */
